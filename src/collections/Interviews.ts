@@ -10,7 +10,7 @@ export const Interviews: CollectionConfig = {
   },
   fields: [
     { name: 'title', type: 'text', required: true, label: 'Título da Entrevista' },
-    { name: 'slug', type: 'text', required: true, unique: true, label: 'URL Amigável (Slug)' },
+    { name: 'slug', type: 'text', required: true, unique: true, label: 'URL Amigável (Slug. Ex: entrevista-nome-sobrenome)' },
     { name: 'person', type: 'relationship', relationTo: 'people' as any, required: true, label: 'Entrevistado' },
     { name: 'type', type: 'select', options: ['Áudio', 'Vídeo'], required: true, label: 'Formato da Entrevista' },
     { name: 'videoUrl', type: 'text', label: 'Link do Vídeo (YouTube/Vimeo)' },

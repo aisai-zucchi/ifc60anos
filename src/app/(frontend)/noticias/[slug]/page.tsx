@@ -3,6 +3,7 @@ import { getPayload } from 'payload';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import ScrollReveal from '@/components/common/ScrollReveal';
+import RichText from '@/components/common/RichText';
 
 export default async function NoticiaDetailPage(props: { params: Promise<{ slug: string }> }) {
   const { slug } = await props.params;
@@ -40,14 +41,13 @@ export default async function NoticiaDetailPage(props: { params: Promise<{ slug:
               alt={noticia.title}
               fill
               style={{ objectFit: 'cover' }}
+              priority
             />
           </div>
         )}
 
         <div className="prose" style={{ fontSize: '1.1rem', lineHeight: 1.8 }}>
-          {/* Note: Payload 3 Rich Text (Lexical) needs a proper renderer. 
-              As a simple implementation, we'll render some text if content exists. */}
-          {noticia.content ? "Conteúdo da notícia disponível no Payload." : "Sem conteúdo adicional."}
+          <RichText content={noticia.content} />
         </div>
       </ScrollReveal>
     </article>

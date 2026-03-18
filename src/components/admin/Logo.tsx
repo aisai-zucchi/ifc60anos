@@ -7,7 +7,7 @@ export default function Logo() {
       <img
         src="/imagens/logoprojeto.png"
         alt="IFC 60 Anos"
-        style={{ height: '40px', width: 'auto' }}
+        style={{ height: '40px', width: 'auto', objectFit: 'contain' }}
       />
       <span style={{ fontSize: '1.2rem', fontWeight: 600, color: '#f5f0e8' }}>
         IFC 60 ANOS
