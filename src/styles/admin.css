@@ -1,0 +1,48 @@
+:root {
+  --theme-bg: #f5f0e8;
+  --theme-text: #0e0e0e;
+  --theme-elevation-50: #ffffff;
+  --theme-elevation-100: #fafaf8;
+  --theme-elevation-150: #f2ede4;
+  --theme-elevation-200: #e8e2d6;
+  --theme-elevation-300: #ded6c9;
+  --theme-elevation-400: #d4cab9;
+  --theme-elevation-500: #c9bea9;
+  --theme-elevation-600: #bfb29a;
+  --theme-elevation-700: #b5a68a;
+  --theme-elevation-800: #aa9a7a;
+  --theme-elevation-850: #a08e6b;
+  --theme-elevation-900: #96825b;
+  --theme-elevation-950: #8c764b;
+  
+  --theme-success-500: #1a3c2e; /* O verde do IFC como cor de destaque */
+  --theme-primary-500: #b8943f; /* O dourado do IFC como primária */
+}
+
+/* Sidebar Customization */
+.nav {
+  background-color: #1a3c2e !important;
+}
+
+.nav a {
+  color: #f5f0e8 !important;
+}
+
+.nav a:hover {
+  background-color: rgba(184, 148, 63, 0.2) !important;
+}
+
+.nav .active {
+  color: #b8943f !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Headers and Buttons */
+.btn--style-primary {
+  background-color: #1a3c2e !important;
+  color: #ffffff !important;
+}
+
+.btn--style-primary:hover {
+  background-color: #b8943f !important;
+}

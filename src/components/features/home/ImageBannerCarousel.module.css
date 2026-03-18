@@ -1,0 +1,92 @@
+.hero {
+  position: relative;
+  width: 100%;
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.slides { 
+  position: relative; 
+  display: grid;
+  width: 100%;
+  overflow: hidden;
+  background: var(--color-surface, #1a1a1a);
+}
+
+.slide {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transition: opacity 0.8s var(--ease);
+  pointer-events: none;
+}
+
+.slide.active { 
+  opacity: 1; 
+  pointer-events: auto;
+  z-index: 2;
+}
+
+.slide img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain; /* Ensure the whole 'faixa' is visible */
+}
+
+/* indicators */
+.indicators {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex; gap: 0.5rem;
+}
+
+.dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.dot.activeDot {
+  background: var(--color-gold);
+  transform: scale(1.2);
+}
+
+/* arrow */
+.arrowRight, .arrowLeft {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.3);
+  border: none;
+  color: #fff;
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 1.2rem;
+}
+
+.arrowRight { right: 1rem; }
+.arrowLeft { left: 1rem; transform: translateY(-50%) rotate(180deg); }
+
+.arrowRight:hover, .arrowLeft:hover {
+  background: rgba(0,0,0,0.6);
+}
+
+@media (max-width: 900px) {
+  .hero { margin: 1rem 0; }
+  .arrowRight, .arrowLeft { display: none; }
+}
+
+@media (max-width: 900px) {
+  .hero { margin: 2rem auto; }
+  .slides { border-radius: 12px; }
+  .arrowRight, .arrowLeft { display: none; }
+}

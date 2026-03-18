@@ -12,6 +12,7 @@ const NAV_ITEMS = [
   { href: "/galeria", label: "Galeria" },
   { href: "/memorias", label: "Memórias" },
   { href: "/entrevistas", label: "Entrevistas" },
+  { href: "/noticias", label: "Notícias" },
 ];
 
 export default function Header() {

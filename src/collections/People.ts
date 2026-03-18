@@ -1,15 +1,17 @@
 import type { CollectionConfig } from 'payload'
+import { deleteMediaAfterDelete } from '../hooks/deleteMedia'
 
 export const People: CollectionConfig = {
   slug: 'people',
   labels: { singular: 'Personagem', plural: 'Personagens' },
   admin: {
     useAsTitle: 'name',
+    description: 'Cadastro de pessoas, ex-alunos e professores que fazem parte da história do IFC.',
   },
   fields: [
     { name: 'name', type: 'text', required: true, label: 'Nome Completo' },
-    { name: 'slug', type: 'text', required: true, unique: true, index: true, label: 'URL Amigável (Slug)' },
-    { name: 'bio', type: 'richText', label: 'Biografia' },
+    { name: 'slug', type: 'text', required: true, unique: true, label: 'URL Amigável (Slug)', admin: { description: 'Identificador único na URL do site.' } },
+    { name: 'biography', type: 'richText', label: 'Biografia / História', admin: { description: 'Conte a trajetória desta pessoa no campus.' } },
     { name: 'photo', type: 'upload', relationTo: 'media', label: 'Foto Oficial' },
     { 
       name: 'role', 

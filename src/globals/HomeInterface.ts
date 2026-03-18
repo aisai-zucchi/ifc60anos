@@ -3,7 +3,19 @@ import type { GlobalConfig } from 'payload'
 export const HomeInterface: GlobalConfig = {
   slug: 'home-interface',
   label: 'Interface da Home',
+  admin: {
+    description: 'Nesta seção você gerencia os elementos visuais da página inicial, como os banners principais (faixas).',
+  },
   fields: [
+    {
+      name: 'bannerTutorial',
+      type: 'ui',
+      admin: {
+        components: {
+          Field: './components/admin/BannerTutorial#default',
+        },
+      },
+    },
     {
       name: 'heroBanners',
       type: 'array',

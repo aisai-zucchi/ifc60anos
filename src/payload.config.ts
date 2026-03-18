@@ -26,6 +26,12 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    components: {
+      graphics: {
+        Logo: './components/admin/Logo#default',
+        Icon: './components/admin/Logo#default',
+      },
+    },
   },
   collections: [Users, Media, People, Interviews, Gallery, News, Campuses, Tags],
   globals: [SiteSettings, HomeInterface],

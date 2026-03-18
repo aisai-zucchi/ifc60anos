@@ -1,10 +1,12 @@
 import type { CollectionConfig } from 'payload'
+import { deleteMediaAfterDelete } from '../hooks/deleteMedia'
 
 export const Interviews: CollectionConfig = {
   slug: 'interviews',
   labels: { singular: 'Entrevista', plural: 'Entrevistas' },
   admin: {
     useAsTitle: 'title',
+    description: 'Repositório de entrevistas em áudio e vídeo com personagens históricos.',
   },
   fields: [
     { name: 'title', type: 'text', required: true, label: 'Título da Entrevista' },
@@ -18,4 +20,7 @@ export const Interviews: CollectionConfig = {
     { name: 'dateRecorded', type: 'date', label: 'Data de Gravação' },
     { name: 'status', type: 'select', options: ['Rascunho', 'Publicado'], defaultValue: 'Rascunho', label: 'Status' },
   ],
+  hooks: {
+    afterDelete: [deleteMediaAfterDelete],
+  },
 }
