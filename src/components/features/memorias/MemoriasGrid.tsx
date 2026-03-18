@@ -4,31 +4,20 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import styles from "./MemoriasGrid.module.css";
 
-const MEMORIAS = [
-  {
-    slug: "texto-1",
-    cat: "Cotidiano",
-    title: "O despertar da EAgro nos anos 80",
-    author: "João Silva",
-    about: "Vivências estudantis",
-  },
-  {
-    slug: "texto-2",
-    cat: "Legado",
-    title: "Dos Mestres Agrícolas ao IFC",
-    author: "Maria Oliveira",
-    about: "Evolução institucional",
-  },
-  {
-    slug: "texto-3",
-    cat: "Trabalho",
-    title: "A Ciência no Campo: 60 anos",
-    author: "Prof. Carlos",
-    about: "Desenvolvimento técnico",
-  },
-];
+interface Memoria {
+  id: string;
+  slug: string;
+  category: string;
+  title: string;
+  author: string;
+  about?: string | null;
+}
 
-export default function MemoriasGrid() {
+interface MemoriasGridProps {
+  initialMemorias: Memoria[];
+}
+
+export default function MemoriasGrid({ initialMemorias }: MemoriasGridProps) {
   const gridRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -46,17 +35,31 @@ export default function MemoriasGrid() {
     return () => obs.disconnect();
   }, []);
 
+  if (!initialMemorias || initialMemorias.length === 0) {
+    return (
+      <section className={styles.grid}>
+        <p style={{ gridColumn: '1 / -1', textAlign: 'center', opacity: 0.5, padding: '4rem' }}>
+          Nenhuma memória encontrada.
+        </p>
+      </section>
+    );
+  }
+
   return (
     <section className={styles.grid} ref={gridRef}>
-      {MEMORIAS.map((m) => (
+      {initialMemorias.map((m) => (
         <Link key={m.slug} href={`/memorias/${m.slug}`} className={styles.card}>
-          <span className={styles.cat}>{m.cat}</span>
+          <span className={styles.cat}>{m.category}</span>
           <h2 className={styles.title}>{m.title}</h2>
           <div className={styles.divider} />
           <div className={styles.meta}>
             Por: {m.author}
-            <br />
-            Sobre: {m.about}
+            {m.about && (
+              <>
+                <br />
+                Sobre: {m.about}
+              </>
+            )}
           </div>
           <span className={styles.arrow}>Ler Memória →</span>
         </Link>

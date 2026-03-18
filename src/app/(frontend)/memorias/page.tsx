@@ -1,13 +1,24 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/layout/PageHero";
 import MemoriasGrid from "@/components/features/memorias/MemoriasGrid";
+import { getPayload } from "payload";
+import config from "@payload-config";
 
 export const metadata: Metadata = {
   title: "Memórias",
   description: "Relatos e vivências que moldaram o IFC Campus Concórdia.",
 };
 
-export default function MemoriasPage() {
+export default async function MemoriasPage() {
+  const payload = await getPayload({ config });
+  const { docs: memorias } = await payload.find({
+    collection: "memories" as any,
+    where: {
+      status: { equals: "Publicado" },
+    },
+    sort: "-createdAt",
+  });
+
   return (
     <>
       <PageHero
@@ -22,7 +33,7 @@ export default function MemoriasPage() {
           conquistas que moldaram o campus ao longo de seis décadas.
         </p>
       </div>
-      <MemoriasGrid />
+      <MemoriasGrid initialMemorias={memorias as any} />
       <style>{`
         .section-intro {
           padding: 5rem 5rem 3rem;

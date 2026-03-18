@@ -2,12 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import styles from "./ArticleReader.module.css";
+import RichText from "@/components/common/RichText";
 
 interface ArticleReaderProps {
   title: string;
   author: string;
   about: string;
-  content: string[];
+  content: string[] | any;
 }
 
 export default function ArticleReader({
@@ -71,23 +72,27 @@ export default function ArticleReader({
         </header>
 
         <article className={styles.articleBody} ref={bodyRef}>
-          {content.map((p, i) => {
-            if (p.startsWith("|DESTAQUE|")) {
-              return (
-                <p key={i} className={styles.destaque}>
-                  {p.replace("|DESTAQUE|", "")}
-                </p>
-              );
-            }
-            if (p === "|DIVIDER|") {
-              return (
-                <div key={i} className={styles.divider}>
-                  ✦
-                </div>
-              );
-            }
-            return <p key={i}>{p}</p>;
-          })}
+          {Array.isArray(content) ? (
+            content.map((p, i) => {
+              if (p.startsWith("|DESTAQUE|")) {
+                return (
+                  <p key={i} className={styles.destaque}>
+                    {p.replace("|DESTAQUE|", "")}
+                  </p>
+                );
+              }
+              if (p === "|DIVIDER|") {
+                return (
+                  <div key={i} className={styles.divider}>
+                    ✦
+                  </div>
+                );
+              }
+              return <p key={i}>{p}</p>;
+            })
+          ) : (
+            <RichText content={content} />
+          )}
         </article>
       </div>
     </>

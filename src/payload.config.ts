@@ -13,6 +13,7 @@ import { Gallery } from './collections/Gallery'
 import { News } from './collections/News'
 import { Campuses } from './collections/Campuses'
 import { Tags } from './collections/Tags'
+import { Memories } from './collections/Memories'
 
 import { SiteSettings } from './globals/SiteSettings'
 import { HomeInterface } from './globals/HomeInterface'
@@ -33,7 +34,7 @@ export default buildConfig({
       },
     },
   },
-  collections: [Users, Media, People, Interviews, Gallery, News, Campuses, Tags],
+  collections: [Users, Media, People, Interviews, Gallery, News, Campuses, Tags, Memories],
   globals: [SiteSettings, HomeInterface],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
