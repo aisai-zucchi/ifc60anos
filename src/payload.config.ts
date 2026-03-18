@@ -48,3 +48,4 @@ export default buildConfig({
   sharp,
   plugins: [],
 })
+// Triggering importMap regeneration

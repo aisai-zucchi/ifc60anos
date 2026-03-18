@@ -1,58 +1,72 @@
 :root {
-  --theme-bg: #f5f0e8;
+  /* Warm cream background but slightly darker for contrast with white panels */
+  --theme-bg: #fdfaf5; 
   --theme-text: #0e0e0e;
+  
+  /* Elevating panels to pure white for crisp look */
   --theme-elevation-50: #ffffff;
-  --theme-elevation-100: #fafaf8;
-  --theme-elevation-150: #f2ede4;
-  --theme-elevation-200: #e8e2d6;
-  --theme-elevation-300: #ded6c9;
-  --theme-elevation-400: #d4cab9;
-  --theme-elevation-500: #c9bea9;
-  --theme-elevation-600: #bfb29a;
-  --theme-elevation-700: #b5a68a;
-  --theme-elevation-800: #aa9a7a;
-  --theme-elevation-850: #a08e6b;
-  --theme-elevation-900: #96825b;
-  --theme-elevation-950: #8c764b;
+  --theme-elevation-100: #ffffff;
+  --theme-elevation-150: #fafaf8;
+  --theme-elevation-200: #f2ede4;
+  --theme-elevation-300: #e8e2d6;
+  --theme-elevation-400: #ded6c9;
+  --theme-elevation-500: #d4cab9;
+  --theme-elevation-600: #c9bea9;
+  --theme-elevation-700: #bfb29a;
+  --theme-elevation-800: #b5a68a;
+  --theme-elevation-850: #aa9a7a;
+  --theme-elevation-900: #a08e6b;
+  --theme-elevation-950: #96825b;
   
   --theme-success-500: #1a3c2e;
   --theme-primary-500: #b8943f;
+  --theme-error-500: #8b0000;
 }
 
-/* Base Body Contrast */
+/* Base Contrast */
 html, body {
   color: #0e0e0e !important;
+  font-family: 'Inter', sans-serif !important;
 }
 
-/* Input & DatePicker Fixes */
-.datepicker, .calendar, .date-time-picker {
-  background-color: #ffffff !important;
-  color: #0e0e0e !important;
+/* Global Button Contrast Fix */
+button, .btn {
+  border: 1px solid rgba(0,0,0,0.1) !important;
 }
 
-.datepicker__day, .calendar__day {
-  color: #0e0e0e !important;
-}
-
-.datepicker__day:hover, .calendar__day:hover {
-  background-color: #b8943f !important;
+/* Primary Buttons */
+.btn--style-primary {
+  background-color: #1a3c2e !important;
   color: #ffffff !important;
+  border: none !important;
 }
 
-.datepicker__header, .calendar__header {
-  color: #0e0e0e !important;
-  font-weight: 600;
+.btn--style-primary:hover {
+  background-color: #b8943f !important;
 }
 
-/* Form Labels & Fields */
-.field-label {
+/* Secondary/Ghost Buttons (the ones that are blend in) */
+.btn--style-secondary, 
+.btn--style-ghost, 
+.pill,
+.collection-header__create-new,
+.bulk-actions__button,
+.list-controls__button,
+.search-filter__button {
+  background-color: #ffffff !important;
   color: #1a3c2e !important;
-  font-weight: 600 !important;
-  font-size: 0.95rem !important;
+  border: 1.5px solid #1a3c2e !important;
+  font-weight: 700 !important;
+  opacity: 1 !important;
 }
 
-.field-type {
-  border-bottom: 1.5px solid rgba(184, 148, 63, 0.3) !important;
+.btn--style-secondary:hover, 
+.pill:hover,
+.collection-header__create-new:hover,
+.bulk-actions__button:hover {
+  background-color: #f5f0e8 !important;
+  color: #b8943f !important;
+  border-color: #b8943f !important;
 }
 
 /* Sidebar Customization */
@@ -62,23 +76,62 @@ html, body {
 
 .nav a {
   color: #f5f0e8 !important;
+  font-weight: 500 !important;
 }
 
 .nav a:hover {
-  background-color: rgba(184, 148, 63, 0.2) !important;
+  background-color: rgba(184, 148, 63, 0.3) !important;
+  color: #ffffff !important;
 }
 
 .nav .active {
   color: #b8943f !important;
-  background-color: rgba(255, 255, 255, 0.05) !important;
+  background-color: rgba(184, 148, 63, 0.1) !important;
+  border-left: 4px solid #b8943f !important;
 }
 
-/* Headers and Buttons */
-.btn--style-primary {
-  background-color: #1a3c2e !important;
+/* List Table Header Fix */
+.list-controls {
+  background-color: #ffffff !important;
+  border-bottom: 2px solid #f2ede4 !important;
+}
+
+/* CALENDAR & DATEPICKER HARD FIX */
+.datepicker, .calendar, .date-time-picker, .rdp {
+  background-color: #ffffff !important;
+  color: #0e0e0e !important;
+  border: 1px solid #d4cab9 !important;
+}
+
+/* Calendar month/year headers */
+.rdp-caption_label, .rdp-nav_button, .rdp-head_cell, .datepicker__header {
+  color: #1a3c2e !important;
+  font-weight: 700 !important;
+  opacity: 1 !important;
+}
+
+/* Calendar days */
+.rdp-day, .datepicker__day, .calendar__day {
+  color: #0e0e0e !important;
+  font-weight: 500 !important;
+}
+
+.rdp-day_selected, .datepicker__day--selected {
+  background-color: #b8943f !important;
   color: #ffffff !important;
 }
 
-.btn--style-primary:hover {
-  background-color: #b8943f !important;
+.rdp-day:hover:not(.rdp-day_selected) {
+  background-color: #f2ede4 !important;
+  color: #1a3c2e !important;
+}
+
+/* Form Labels */
+.field-label {
+  color: #1a3c2e !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px !important;
 }

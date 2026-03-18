@@ -8,15 +8,6 @@ export const HomeInterface: GlobalConfig = {
   },
   fields: [
     {
-      name: 'bannerTutorial',
-      type: 'ui',
-      admin: {
-        components: {
-          Field: './components/admin/BannerTutorial#default',
-        },
-      },
-    },
-    {
       name: 'heroBanners',
       type: 'array',
       fields: [

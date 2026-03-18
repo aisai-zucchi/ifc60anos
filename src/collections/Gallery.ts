@@ -6,7 +6,7 @@ export const Gallery: CollectionConfig = {
   labels: { singular: 'Foto do Acervo', plural: 'Galeria' },
   admin: {
     useAsTitle: 'title',
-    description: 'Acervo fotográfico histórico. Ao excluir uma foto aqui, o arquivo físico também será removido do servidor.',
+    description: '🖼️ RELICÁRIO: Fotos para a Galeria e Memórias. Use legendas descritivas. Ao excluir, o arquivo físico também sai do servidor.',
   },
   fields: [
     { name: 'title', type: 'text', required: true, label: 'Título da Imagem', admin: { description: 'Breve descrição da foto para identificação.' } },

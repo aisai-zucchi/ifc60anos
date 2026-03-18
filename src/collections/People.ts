@@ -6,7 +6,7 @@ export const People: CollectionConfig = {
   labels: { singular: 'Personagem', plural: 'Personagens' },
   admin: {
     useAsTitle: 'name',
-    description: 'Cadastro de pessoas, ex-alunos e professores que fazem parte da história do IFC.',
+    description: '👥 PERSONAGENS: Base de dados de pessoas históricas. Cadastre aqui primeiro para poder vincular entrevistados e créditos em notícias.',
   },
   fields: [
     { name: 'name', type: 'text', required: true, label: 'Nome Completo' },

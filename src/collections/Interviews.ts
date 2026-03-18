@@ -6,7 +6,7 @@ export const Interviews: CollectionConfig = {
   labels: { singular: 'Entrevista', plural: 'Entrevistas' },
   admin: {
     useAsTitle: 'title',
-    description: 'Repositório de entrevistas em áudio e vídeo com personagens históricos.',
+    description: '🎙️ VOZES DO CAMPUS: Cole o link do YouTube para vídeos ou suba o arquivo de áudio. IMPORTANTE: Cada entrevista deve ser vinculada a uma "Pessoa" cadastrada previamente.',
   },
   fields: [
     { name: 'title', type: 'text', required: true, label: 'Título da Entrevista' },

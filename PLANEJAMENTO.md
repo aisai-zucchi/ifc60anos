@@ -8,13 +8,10 @@
 
 A composição abaixo foi selecionada para garantir escalabilidade, segurança e baixa manutenção a longo prazo.
 
-**Runtime:** Node.js 20+ LTS.
 **Linguagem:** TypeScript (Tipagem estática ponta a ponta, do banco de dados ao frontend).
 **Framework Core:** Next.js 15 (App Router). Escolha definitiva para renderização híbrida (SSR/SSG), garantindo SEO perfeito e carregamento instantâneo.
 **Headless CMS:** Payload CMS v3. Integrado nativamente ao Next.js, elimina a necessidade de um servidor Node separado, gerenciando o banco de dados e provendo uma interface administrativa premium e customizável.
 **Banco de Dados:** PostgreSQL (Relacional). Por sua relativa facilidade de manutenção e expansão
-**ORM:** Drizzle ORM. Leve, seguro contra SQL Injection e com excelente performance.
-**Armazenamento de Mídia (Storage):** AWS S3 ou Cloudflare R2. Como é um portal com foco histórico (muitas fotos e áudios), as mídias não devem ficar no mesmo servidor da aplicação.
 **Estilização:** Tailwind CSS v4 + componentes acessíveis (ex: Radix UI ou shadcn/ui).
 **Infraestrutura (VPS):** Ubuntu com servidor web Nginx e processos node gerenciados pelo PM2.
 
@@ -29,12 +26,12 @@ A modelagem foi expandida para incluir campos essenciais de SEO (Slugs), control
 #### `People` (Personagens Históricos)
 | Campo | Tipo | Descrição |
 | :--- | :--- | :--- |
-| **slug** | Text | URL amigável (ex: `/personagens/joao-silva`) - *Único e Indexado*. |
+| **slug** | Text | URL amigável (ex: `joao-silva`) - *Único e Indexado*. |
 | **name** | Text | Nome completo. |
-| **bio** | RichText | Biografia completa (com formatação rica). |
+| **biography** | RichText | Biografia completa (com formatação rica). |
 | **photo** | Media | Foto oficial. |
 | **role** | Select | 'Aluno', 'Servidor', 'Comunidade', 'Diretor'. |
-| **campus** | Relationship | Vínculo com unidades do IFC (ex: Concórdia, Rio do Sul, etc.). |
+| **campus** | Relationship | Vínculo com a coleção `Campuses`. |
 | **status** | Select | 'Rascunho', 'Publicado'. |
 
 #### `Interviews` (Acervo de História Oral / Entrevistas)
@@ -42,24 +39,24 @@ A modelagem foi expandida para incluir campos essenciais de SEO (Slugs), control
 | :--- | :--- | :--- |
 | **slug** | Text | URL amigável. |
 | **title** | Text | Título da entrevista. |
-| **person** | Relationship | Vínculo 1:1 com a coleção `People`. |
+| **person** | Relationship | Vínculo com a coleção `People`. |
 | **type** | Select | 'Áudio' ou 'Vídeo'. |
-| **videoUrl** | Text | Link externo (YouTube/Vimeo). |
-| **audioFile** | Media | Upload direto do arquivo. |
-| **transcription** | RichText | Transcrição acessível (essencial para a11y e SEO). |
+| **videoUrl** | Text | Link externo (YouTube/Vimeo). Convertido em embed no front. |
+| **audioFile** | Media | Upload direto do arquivo para o player nativo. |
+| **transcription** | RichText | Transcrição completa e acessível. |
 | **featuredImage** | Media | Imagem de capa/thumbnail. |
 | **dateRecorded** | Date | Data da realização da entrevista. |
 | **status** | Select | 'Rascunho', 'Publicado'. |
 
-#### `Gallery` (Acervo Fotográfico Digital)
+#### `Gallery` (Relicário / Acervo Fotográfico)
 | Campo | Tipo | Descrição |
 | :--- | :--- | :--- |
 | **title** | Text | Título ou descrição curta da imagem. |
-| **image** | Media | Arquivo original (otimizado automaticamente via Next.js). |
-| **year** | Number | Ano exato (opcional). |
+| **image** | Media | Arquivo original (upload). |
+| **year** | Number | Ano exato do registro. |
 | **decade** | Select | '1960', '1970', '1980', '1990', '2000', '2010', '2020'. |
-| **campus** | Relationship | Local da fotografia. |
-| **tags** | Relationship | 'Eventos', 'Infraestrutura', 'Ensino', 'Esportes'. |
+| **campus** | Relationship | Local da fotografia (vínculo com `Campuses`). |
+| **tags** | Relationship | Categorias (vínculo com `Tags`). |
 | **credits** | Text | Créditos do fotógrafo ou doador. |
 
 #### `News` (Notícias e Marcos do Jubileu)
@@ -67,11 +64,14 @@ A modelagem foi expandida para incluir campos essenciais de SEO (Slugs), control
 | :--- | :--- | :--- |
 | **slug** | Text | URL amigável. |
 | **title** | Text | Título da matéria. |
-| **excerpt** | Textarea | Resumo para cards e SEO meta-description. |
-| **content** | RichText | Corpo da matéria completo. |
+| **excerpt** | Textarea | Resumo para cards e SEO. |
+| **content** | RichText | Corpo da matéria (suporta imagens e áudios internos). |
 | **coverImage** | Media | Imagem de destaque. |
-| **publishDate** | Date | Agendamento de postagem. |
+| **publishDate** | Date | Data de postagem. |
 | **status** | Select | 'Rascunho', 'Publicado'. |
+
+#### `Campuses` & `Tags` (Auxiliares)
+Collections simples para categorização e vínculos geográficos/temáticos em todo o sistema.
 
 ---
 
@@ -158,12 +158,13 @@ Para otimizar o cronograma, o projeto atual (`/site`) será tratado como a nossa
 
 O cronograma foi otimizado para **4 Sprints de 2 semanas**, focando em entregas funcionais e testes simultâneos.
 
-**Sprint 1: Infraestrutura e Backend (Foundation & CMS)**
+**Sprint 1: Infraestrutura e Backend (Foundation & CMS) - [CONCLUÍDA]**
   * **Objetivo:** Estabelecer o coração do sistema e o painel admin.
-  * Setup do repositório, Next.js 15 e integração do Payload CMS v3.
-  * Provisionamento do PostgreSQL e Storage S3/R2 para mídias.
-  * Criação das Collections Relacionais (People, Interviews, Gallery, News).
-  * **Migração Inicial:** Upload dos logotipos e ícones do site legado.
+  * Setup do repositório, Next.js 16 e integração do Payload CMS v3.
+  * Provisionamento do PostgreSQL e sistema de hooks para limpeza de mídias.
+  * Criação das Collections Relacionais completas e Globais de interface.
+  * **Implementação:** Branding Customizado e Contraste Elevado no Admin.
+  * **Tutoriais:** Sistema de ajuda integrado nas descrições das coleções.
 
 **Sprint 2: UI Design System e Frontend Core**
   * **Objetivo:** Definir a identidade visual e a estrutura da home.

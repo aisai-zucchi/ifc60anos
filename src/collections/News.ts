@@ -6,7 +6,7 @@ export const News: CollectionConfig = {
   labels: { singular: 'Notícia', plural: 'Notícias' },
   admin: {
     useAsTitle: 'title',
-    description: 'Gerenciamento de notícias e artigos do portal. Lembre-se de definir o status como "Publicado" para que a notícia apareça no site.',
+    description: '📰 NOTÍCIAS: Aqui você gerencia o portal de novidades. Use o editor para inserir fotos/áudios no corpo do texto. Lembre-se de definir como "Publicado" para aparecer no site.',
   },
   fields: [
     { name: 'title', type: 'text', required: true, label: 'Título da Notícia', admin: { description: 'O título principal que aparece na listagem e na página da notícia.' } },
