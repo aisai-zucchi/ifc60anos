@@ -1,0 +1,119 @@
+.secTextosdeMemorias {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 3vh;
+    background-color: #1a3e20;
+    margin-top: 100px;
+    padding-bottom: 10vh;
+}
+
+.secTextosdeMemorias >h1 {
+    font-size: 60px;
+    color: #ede1b7;
+    margin-top: 20px;
+}
+
+.secTextosdeMemorias > p {
+    color: #FFF;
+}
+
+.container-memorias {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5vh;
+    width: 80%;
+    margin-top: 30px;
+}
+
+.box-memoria {
+    min-width: 300px;
+    max-width: 370px;
+    flex: 1 1 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5e8be;
+    border: 3px solid #393b2e;
+    padding: 3vh 0 3vh 0;
+    border-radius: 10px;
+    box-shadow:  0 4px 4px 0 rgba(81, 81, 81, 0.25);
+}
+
+.box-memoria button {
+    width: 10vw;
+    height: 6vh;
+    padding: 1vh;
+    font-size: 25px;
+    border: none;
+    border-radius: 10px;
+    background: #11471A;
+    box-shadow: 0 1px 4px 0 rgba(128, 128, 128, 0.25);
+}
+
+.box-memoria button a {
+    text-decoration: none;
+    color: #FFF;
+}
+
+.textosdeMemorias {
+    background-color: #1a3e20;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    justify-content:flex-start;
+    align-items: center;
+    margin-top: 100px;
+    padding: 20px 0;
+}
+
+.textosdeMemorias h1 {
+    font-size: 50px;
+}
+.textosdeMemorias h1, h2 {
+    color: #FFF;
+}
+.texto-memoria {
+    max-width: 70vw;        
+    margin: 0 auto;          
+    font-family: "Georgia", serif;
+    font-size: 1.1rem;
+    line-height: 1.8;        
+    color: #e3e3e3;
+    padding: 20px;
+}
+
+.texto-memoria p {
+    margin-bottom: 18px;      
+    text-align: justify;       
+}
+
+.texto-memoria p:not(:first-child) {
+    text-indent: 1.5em;
+}
+
+.texto-memoria h1,
+.texto-memoria h2,
+.texto-memoria h3 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-family: "Merriweather", serif;
+    font-weight: bold;
+    color: #1d5e27;            
+}
+
+.texto-memoria blockquote {
+    margin: 20px 0;
+    padding: 15px 20px;
+    border-left: 4px solid #1d5e27;
+    background: #f6f6f6;
+    font-style: italic;
+}
+
+.texto-memoria strong {
+    color: #000;
+    font-weight: bold;
+}

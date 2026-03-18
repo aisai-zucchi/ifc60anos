@@ -1,0 +1,21 @@
+{
+  "decadas": [
+    {
+      "ano": "Década de 1960",
+      "fotos": [
+        {
+          "ano": "1967",
+          "imagem": "img/1967a.jpg",
+          "descricao": "Descrição da imagem/evento",
+          "tags": ["Desfiles", "Alunos"]
+        },
+        {
+          "ano": "1967",
+          "imagem": "img/1967b.jpg",
+          "descricao": "Descrição da imagem/evento",
+          "tags": ["Infraestrutura"]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+/* CONTAINER GERAL */
+.entrevista-container {
+  position: relative;
+  background-color: #11471A;
+  width: 90%;
+  max-width: 75vw;
+  margin: 50px auto;
+  padding-bottom: 10vh;
+}
+
+body {
+    background-color: #11471A;
+}
+
+.Entrevistas {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 110px 0;
+    align-items: center;
+}
+
+h1, p {
+    text-align: center;
+    color: #FFF;
+    margin-top: 10px;
+}
+
+h1 { font-size: 60px;}
+
+
+/* LINHA CENTRAL */
+.entrevista-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 3px;
+  background: #d6d6d6;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+/* ITEM */
+.entrevista-item {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 50px 0 70px 0;
+  position: relative;
+  z-index: 2;
+  gap: 20px;
+}
+
+/* ITEM INVERTIDO */
+.entrevista-item.invert {
+  flex-direction: row-reverse;
+}
+
+/* LADOS */
+.entrevista-content {
+  width: 45%;
+}
+
+/* TEXTO (nome + biografia) */
+.entrevista-titulo {
+  font-family: "Montaga", serif;
+  font-size: 24px;
+  color: #e8e1c8;
+  margin-bottom: 10px;
+}
+
+.mini-bio {
+  color: #ccc;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.entrevista-item .text-area {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.entrevista-item.invert .text-area {
+  text-align: left;
+  align-items: flex-start;
+}
+
+/* MÍDIA (vídeo/imagem + áudio) */
+.midia-wrapper {
+  width: 100%;
+  height: 260px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #eee;
+  margin-bottom: 15px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.midia-wrapper iframe,
+.midia-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Áudio */
+.audio-player {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/* Botão transcrição */
+.btn-transcricao {
+  display: inline-block;
+  margin-top: 5px;
+  background: #b49a6a;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.btn-transcricao:hover {
+  background: #9a8359;
+}
+
+/* MARCADOR */
+.entrevista-marker {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  background: #e8e1c8;
+  border-radius: 50%;
+  z-index: 3;
+}
+
+.transcricao {
+    background-color: #1a3e20;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    justify-content:flex-start;
+    align-items: center;
+    margin-top: 100px;
+    padding: 20px 0;
+}
+
+.transcricao h1 {
+    font-size: 40px;
+}
+
+.transcricao h1, h2 {
+    color: #FFF;
+}
+
+.transcricao-texto {
+    max-width: 70vw;        
+    margin: 0 auto;          
+    font-family: "Georgia", serif;
+    font-size: 1.1rem;
+    line-height: 1.8;        
+    color: #e3e3e3;
+    padding: 20px;
+}
+
+.transcricao >p {
+    margin-top: -2vh;
+    font-weight: 300;
+}
+
+.transcricao-texto p {
+    margin-bottom: 18px;      
+    text-align: justify;       
+}
+
+.transcricao-texto p:not(:first-child) {
+    text-indent: 1.5em;
+}
+
+.transcricao img {
+    height: auto;
+    width: 60vw;
+    border-radius: 2px;
+    border: 10px solid #bab5a4e8;
+}
+
+.transcricao-texto h1,
+.transcricao-texto h2,
+.transcricao-texto h3 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-family: "Merriweather", serif;
+    font-weight: bold;
+    color: #1d5e27;            
+}
+
+.transcricao-texto blockquote {
+    margin: 20px 0;
+    padding: 15px 20px;
+    border-left: 4px solid #1d5e27;
+    background: #f6f6f6;
+    font-style: italic;
+}
+
+.transcricao-texto strong {
+    color: #000;
+    font-weight: bold;
+}
+
