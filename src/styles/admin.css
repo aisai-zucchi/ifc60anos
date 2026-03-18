@@ -15,8 +15,44 @@
   --theme-elevation-900: #96825b;
   --theme-elevation-950: #8c764b;
   
-  --theme-success-500: #1a3c2e; /* O verde do IFC como cor de destaque */
-  --theme-primary-500: #b8943f; /* O dourado do IFC como primária */
+  --theme-success-500: #1a3c2e;
+  --theme-primary-500: #b8943f;
+}
+
+/* Base Body Contrast */
+html, body {
+  color: #0e0e0e !important;
+}
+
+/* Input & DatePicker Fixes */
+.datepicker, .calendar, .date-time-picker {
+  background-color: #ffffff !important;
+  color: #0e0e0e !important;
+}
+
+.datepicker__day, .calendar__day {
+  color: #0e0e0e !important;
+}
+
+.datepicker__day:hover, .calendar__day:hover {
+  background-color: #b8943f !important;
+  color: #ffffff !important;
+}
+
+.datepicker__header, .calendar__header {
+  color: #0e0e0e !important;
+  font-weight: 600;
+}
+
+/* Form Labels & Fields */
+.field-label {
+  color: #1a3c2e !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+}
+
+.field-type {
+  border-bottom: 1.5px solid rgba(184, 148, 63, 0.3) !important;
 }
 
 /* Sidebar Customization */
