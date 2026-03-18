@@ -31,11 +31,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function FrontendLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function RootLayout(props: { children: React.ReactNode }) {
+  const { children } = props;
+
   return (
     <html lang="pt-br">
       <body className={`${cormorant.variable} ${dmSans.variable}`}>
