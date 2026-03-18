@@ -25,13 +25,13 @@ const IMAGES: GalleryImage[] = [
     tags: ["Alunos"],
   },
   {
-    src: "/imagens/imagens-galeria/refeitório.jpg",
+    src: "/imagens/imagens-galeria/refeitorio.jpg",
     year: 1969,
     desc: "Refeitório do IFC",
     tags: ["Infraestrutura"],
   },
   {
-    src: "/imagens/imagens-galeria/inauguraçãoCampo.jpg",
+    src: "/imagens/imagens-galeria/inauguracaoCampo.jpg",
     year: 1969,
     desc: "Inauguração do Campo do IFC Concórdia",
     tags: ["Infraestrutura", "Eventos"],

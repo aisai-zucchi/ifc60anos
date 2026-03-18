@@ -12,7 +12,7 @@ export default function EntrevistasPage() {
   return (
     <>
       <PageHero
-        bgImage="/imagens/imagens-galeria/inauguraçãoCampo.jpg"
+        bgImage="/imagens/imagens-galeria/inauguracaoCampo.jpg"
         eyebrow="Relatos Orais"
         title="Vozes do"
         titleEm="Campus"

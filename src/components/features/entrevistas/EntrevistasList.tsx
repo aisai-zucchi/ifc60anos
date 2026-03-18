@@ -21,7 +21,7 @@ const ENTREVISTAS: Entrevista[] = [
     title: "Memórias do Início",
     desc: "Entrevista com os primeiros servidores da Escola Agrotécnica, relatando os desafios da década de 60.",
     transcricaoHref: "#",
-    image: "/imagens/imagens-galeria/inauguraçãoCampo.jpg",
+    image: "/imagens/imagens-galeria/inauguracaoCampo.jpg",
     hasAudio: true,
     invert: false,
   },
