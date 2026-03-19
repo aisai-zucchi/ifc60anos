@@ -56,7 +56,9 @@ export default function EntrevistasList({ interviews = [] }: EntrevistasListProp
               {personName && <span className="eyebrow" style={{ marginTop: '-0.5rem', marginBottom: '1rem', display: 'block' }}>{personName}</span>}
               <div className={styles.desc}>
                  {/* Note: Transcription/Content is rich text. Showing a snippet here. */}
-                 {e.transcription ? "Entrevista disponível para leitura." : "Explore as memórias em áudio/vídeo abaixo."}
+                 {e.type === 'Texto' || e.transcription 
+                   ? "Entrevista disponível para leitura." 
+                   : "Explore as memórias em áudio/vídeo abaixo."}
               </div>
               
               <LinkButton href={`/entrevistas/${e.slug}`} label="Ver Detalhes" />

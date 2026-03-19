@@ -49,7 +49,10 @@
 
 @media (max-width: 900px) {
   .hero {
-    padding: 0 2rem 3rem;
+    padding: 120px 1.5rem 4rem;
+    align-items: center;
+    text-align: center;
+    min-height: 400px;
   }
 
   .hero::before {

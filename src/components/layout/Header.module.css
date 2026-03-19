@@ -151,6 +151,7 @@
   align-items: center;
   justify-content: center;
   gap: 2.5rem;
+  padding-top: 5rem;
 }
 
 .mobileMenu.open {
