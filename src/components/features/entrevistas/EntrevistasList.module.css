@@ -115,3 +115,9 @@
   .item.invert .text { order: unset; }
   .item.invert .media { order: unset; }
 }
+
+@media (max-width: 520px) {
+  .text, .media {
+    padding: 2rem 1.5rem;
+  }
+}

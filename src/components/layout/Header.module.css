@@ -182,3 +182,12 @@
     display: flex;
   }
 }
+
+@media (max-width: 520px) {
+  .header:not(.scrolled) {
+    padding: 1.2rem 1.5rem;
+  }
+  .header.scrolled {
+    padding: 1rem 1.5rem;
+  }
+}

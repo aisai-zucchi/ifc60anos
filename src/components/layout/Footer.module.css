@@ -61,3 +61,20 @@
     align-items: flex-start;
   }
 }
+
+@media (max-width: 520px) {
+  .footer {
+    padding: 1.5rem;
+    gap: 2rem;
+  }
+  .links {
+    gap: 1rem;
+    flex-direction: column;
+  }
+  .ifcLogo img {
+    height: 50px;
+  }
+  .projectLogo {
+    height: 50px;
+  }
+}
