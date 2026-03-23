@@ -5,7 +5,7 @@ interface PageHeroProps {
   bgImage: string;
   eyebrow: string;
   title: string;
-  titleEm: string;
+  titleEm?: string;
 }
 
 export default function PageHero({
@@ -28,8 +28,12 @@ export default function PageHero({
         <span className="eyebrow">{eyebrow}</span>
         <h1>
           {title}
-          <br />
-          <em>{titleEm}</em>
+          {titleEm && (
+            <>
+              <br />
+              <em>{titleEm}</em>
+            </>
+          )}
         </h1>
       </div>
     </section>
