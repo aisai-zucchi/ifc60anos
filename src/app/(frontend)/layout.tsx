@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import ScrollToTop from "@/components/common/ScrollToTop/ScrollToTop";
 import "../globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -40,6 +41,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         <Header />
         <main>{children}</main>
         <Footer />
+        <ScrollToTop />
       </body>
     </html>
   );

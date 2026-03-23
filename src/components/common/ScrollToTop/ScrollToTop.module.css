@@ -1,0 +1,49 @@
+.scrollToTopBtn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--color-green);
+  color: var(--color-cream);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s var(--ease);
+  z-index: 99; /* Below the grain overlay which is 999 */
+}
+
+.scrollToTopBtn:hover {
+  background-color: var(--color-gold);
+  color: var(--color-ink);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s var(--ease);
+}
+
+.scrollToTopBtn:hover .icon {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .scrollToTopBtn {
+    bottom: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+  }
+  
+  .icon {
+    width: 20px;
+    height: 20px;
+  }
+}
