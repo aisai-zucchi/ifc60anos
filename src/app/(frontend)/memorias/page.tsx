@@ -16,7 +16,17 @@ export default async function MemoriasPage() {
     where: {
       status: { equals: "Publicado" },
     },
-    sort: "-createdAt",
+    sort: 'ranking',
+    select: {
+      id: true,
+      title: true,
+      slug: true,
+      category: true,
+      author: true,
+      about: true,
+      ranking: true,
+      status: true,
+    },
   });
 
   return (
