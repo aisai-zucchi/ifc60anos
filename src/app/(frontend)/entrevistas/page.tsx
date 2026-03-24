@@ -4,6 +4,8 @@ import EntrevistasList from "@/components/features/entrevistas/EntrevistasList";
 import configPromise from '@payload-config';
 import { getPayload } from 'payload';
 
+export const revalidate = 3600; // Recarrega a cada 1 hora
+
 export const metadata: Metadata = {
   title: "Vozes",
   description: "Testemunhos de quem ajudou a construir a história do IFC Campus Concórdia.",

@@ -5,6 +5,23 @@ import { notFound } from 'next/navigation';
 import ScrollReveal from '@/components/common/ScrollReveal';
 import RichText from '@/components/common/RichText';
 
+export const revalidate = 3600; // Recarrega a cada 1 hora
+
+export async function generateStaticParams() {
+  const payload = await getPayload({ config: configPromise });
+  const news = await payload.find({
+    collection: 'news' as any,
+    where: {
+      status: { equals: 'Publicado' },
+    },
+    limit: 100, // Pre-gera as 100 mais recentes
+  });
+
+  return news.docs.map((doc: any) => ({
+    slug: doc.slug,
+  }));
+}
+
 export default async function NoticiaDetailPage(props: { params: Promise<{ slug: string }> }) {
   const { slug } = await props.params;
   const payload = await getPayload({ config: configPromise });

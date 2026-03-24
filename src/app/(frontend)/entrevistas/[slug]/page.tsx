@@ -2,7 +2,24 @@ import { getPayload } from 'payload';
 import configPromise from '@payload-config';
 import { notFound } from 'next/navigation';
 import PageHero from "@/components/layout/PageHero";
-import { RichText } from '@/components/RichText';
+import RichText from '@/components/common/RichText';
+
+export const revalidate = 3600; // Recarrega a cada 1 hora
+
+export async function generateStaticParams() {
+  const payload = await getPayload({ config: configPromise });
+  const interviews = await payload.find({
+    collection: 'interviews' as any,
+    where: {
+      status: { equals: 'Publicado' },
+    },
+    limit: 100,
+  });
+
+  return interviews.docs.map((doc: any) => ({
+    slug: doc.slug,
+  }));
+}
 
 export default async function EntrevistaInternaPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

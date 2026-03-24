@@ -4,6 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ScrollReveal from '@/components/common/ScrollReveal';
 
+export const revalidate = 3600; // Recarrega a cada 1 hora
+
 export default async function NoticiaPage() {
   const payload = await getPayload({ config: configPromise });
   const news = await payload.find({

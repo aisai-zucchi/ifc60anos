@@ -26,14 +26,17 @@ export default function RichText({ content }: { content: any }) {
         );
       case 'list':
         const ListTag = node.listType === 'number' ? 'ol' : 'ul';
+        const listStyle = node.listType === 'number' ? 'decimal' : 'disc';
         return (
-          <ListTag key={index} style={{ marginBottom: '1.5rem', paddingLeft: '1.5rem', listStyleType: node.listType === 'number' ? 'decimal' : 'disc' }}>
-            {node.children?.map((item: any, i: number) => (
-              <li key={i} style={{ marginBottom: '0.5rem' }}>
-                {item.children?.map((child: any, j: number) => renderText(child, j))}
-              </li>
-            ))}
+          <ListTag key={index} style={{ marginBottom: '1.5rem', paddingLeft: '1.5rem', listStyleType: listStyle }}>
+            {node.children?.map((child: any, i: number) => renderNode(child, i))}
           </ListTag>
+        );
+      case 'listitem':
+        return (
+          <li key={index} style={{ marginBottom: '0.5rem' }}>
+            {node.children?.map((child: any, i: number) => renderText(child, i))}
+          </li>
         );
       case 'upload':
         // Handle embedded images/media
