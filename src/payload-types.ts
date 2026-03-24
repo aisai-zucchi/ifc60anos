@@ -69,6 +69,13 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    people: Person;
+    interviews: Interview;
+    gallery: Gallery;
+    news: News;
+    campuses: Campus;
+    tags: Tag;
+    memories: Memory;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,18 +85,34 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    people: PeopleSelect<false> | PeopleSelect<true>;
+    interviews: InterviewsSelect<false> | InterviewsSelect<true>;
+    gallery: GallerySelect<false> | GallerySelect<true>;
+    news: NewsSelect<false> | NewsSelect<true>;
+    campuses: CampusesSelect<false> | CampusesSelect<true>;
+    tags: TagsSelect<false> | TagsSelect<true>;
+    memories: MemoriesSelect<false> | MemoriesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
-    defaultIDType: string;
+    defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'site-settings': SiteSetting;
+    'home-interface': HomeInterface;
+  };
+  globalsSelect: {
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+    'home-interface': HomeInterfaceSelect<false> | HomeInterfaceSelect<true>;
+  };
   locale: null;
+  widgets: {
+    collections: CollectionsWidget;
+  };
   user: User;
   jobs: {
     tasks: unknown;
@@ -119,7 +142,7 @@ export interface UserAuthOperations {
  * via the `definition` "users".
  */
 export interface User {
-  id: string;
+  id: number;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -144,7 +167,7 @@ export interface User {
  * via the `definition` "media".
  */
 export interface Media {
-  id: string;
+  id: number;
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -157,13 +180,233 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    card?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    tablet?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * 👥 PERSONAGENS: Base de dados de pessoas históricas. Cadastre aqui primeiro para poder vincular entrevistados e créditos em notícias.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "people".
+ */
+export interface Person {
+  id: number;
+  name: string;
+  /**
+   * Identificador único na URL do site.
+   */
+  slug: string;
+  /**
+   * Conte a trajetória desta pessoa no campus.
+   */
+  biography?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  photo?: (number | null) | Media;
+  role?: ('Aluno' | 'Servidor' | 'Comunidade' | 'Diretor') | null;
+  campus?: (number | null) | Campus;
+  status?: ('Rascunho' | 'Publicado') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "campuses".
+ */
+export interface Campus {
+  id: number;
+  name: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * 🎙️ VOZES DO CAMPUS: Cole o link do YouTube para vídeos ou suba o arquivo de áudio. IMPORTANTE: Cada entrevista deve ser vinculada a uma "Pessoa" cadastrada previamente.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "interviews".
+ */
+export interface Interview {
+  id: number;
+  title: string;
+  slug: string;
+  person: number | Person;
+  type: 'Áudio' | 'Vídeo' | 'Texto';
+  videoUrl?: string | null;
+  audioFile?: (number | null) | Media;
+  transcription?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  featuredImage?: (number | null) | Media;
+  dateRecorded?: string | null;
+  ranking?: number | null;
+  status?: ('Rascunho' | 'Publicado') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * 🖼️ RELICÁRIO: Fotos para a Galeria e Memórias. Use legendas descritivas. Ao excluir, o arquivo físico também sai do servidor.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery".
+ */
+export interface Gallery {
+  id: number;
+  /**
+   * Breve descrição da foto para identificação.
+   */
+  title: string;
+  /**
+   * Faça o upload da foto original. O sistema gerará versões otimizadas automaticamente.
+   */
+  image: number | Media;
+  /**
+   * Ano em que a foto foi tirada (Ex: 1964).
+   */
+  year?: number | null;
+  decade?: ('1960' | '1970' | '1980' | '1990' | '2000' | '2010' | '2020') | null;
+  campus?: (number | null) | Campus;
+  tags?: (number | Tag)[] | null;
+  credits?: string | null;
+  ranking?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags".
+ */
+export interface Tag {
+  id: number;
+  name: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * 📰 NOTÍCIAS: Aqui você gerencia o portal de novidades. Use o editor para inserir fotos/áudios no corpo do texto. Lembre-se de definir como "Publicado" para aparecer no site.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news".
+ */
+export interface News {
+  id: number;
+  /**
+   * O título principal que aparece na listagem e na página da notícia.
+   */
+  title: string;
+  /**
+   * Gerado automaticamente, mas pode ser editado. Ex: minha-noticia-importante
+   */
+  slug: string;
+  excerpt?: string | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  coverImage?: (number | null) | Media;
+  publishDate?: string | null;
+  ranking?: number | null;
+  status?: ('Rascunho' | 'Publicado') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * 📜 MEMÓRIAS: Relatos e vivências que moldaram o IFC Campus Concórdia. Use o editor para o texto completo.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "memories".
+ */
+export interface Memory {
+  id: number;
+  title: string;
+  slug: string;
+  category: 'Cotidiano' | 'Legado' | 'Trabalho';
+  author: string;
+  about?: string | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  ranking?: number | null;
+  status?: ('Rascunho' | 'Publicado') | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
-  id: string;
+  id: number;
   key: string;
   data:
     | {
@@ -180,20 +423,48 @@ export interface PayloadKv {
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: string;
+  id: number;
   document?:
     | ({
         relationTo: 'users';
-        value: string | User;
+        value: number | User;
       } | null)
     | ({
         relationTo: 'media';
-        value: string | Media;
+        value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'people';
+        value: number | Person;
+      } | null)
+    | ({
+        relationTo: 'interviews';
+        value: number | Interview;
+      } | null)
+    | ({
+        relationTo: 'gallery';
+        value: number | Gallery;
+      } | null)
+    | ({
+        relationTo: 'news';
+        value: number | News;
+      } | null)
+    | ({
+        relationTo: 'campuses';
+        value: number | Campus;
+      } | null)
+    | ({
+        relationTo: 'tags';
+        value: number | Tag;
+      } | null)
+    | ({
+        relationTo: 'memories';
+        value: number | Memory;
       } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   updatedAt: string;
   createdAt: string;
@@ -203,10 +474,10 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string;
+  id: number;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   key?: string | null;
   value?:
@@ -226,7 +497,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string;
+  id: number;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -271,6 +542,140 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        card?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        tablet?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "people_select".
+ */
+export interface PeopleSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  biography?: T;
+  photo?: T;
+  role?: T;
+  campus?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "interviews_select".
+ */
+export interface InterviewsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  person?: T;
+  type?: T;
+  videoUrl?: T;
+  audioFile?: T;
+  transcription?: T;
+  featuredImage?: T;
+  dateRecorded?: T;
+  ranking?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery_select".
+ */
+export interface GallerySelect<T extends boolean = true> {
+  title?: T;
+  image?: T;
+  year?: T;
+  decade?: T;
+  campus?: T;
+  tags?: T;
+  credits?: T;
+  ranking?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news_select".
+ */
+export interface NewsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  excerpt?: T;
+  content?: T;
+  coverImage?: T;
+  publishDate?: T;
+  ranking?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "campuses_select".
+ */
+export interface CampusesSelect<T extends boolean = true> {
+  name?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags_select".
+ */
+export interface TagsSelect<T extends boolean = true> {
+  name?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "memories_select".
+ */
+export interface MemoriesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  category?: T;
+  author?: T;
+  about?: T;
+  content?: T;
+  ranking?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -311,6 +716,117 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings".
+ */
+export interface SiteSetting {
+  id: number;
+  seoTitle?: string | null;
+  seoDescription?: string | null;
+  socialLinks?:
+    | {
+        platform: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Nesta seção você gerencia os elementos visuais da página inicial, como os banners principais (faixas).
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-interface".
+ */
+export interface HomeInterface {
+  id: number;
+  heroBanners?:
+    | {
+        image: number | Media;
+        title: string;
+        subtitle?: string | null;
+        ctaLink?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  highlightStats?:
+    | {
+        label: string;
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  featuredHistory?:
+    | (
+        | {
+            relationTo: 'interviews';
+            value: number | Interview;
+          }
+        | {
+            relationTo: 'gallery';
+            value: number | Gallery;
+          }
+      )[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  seoTitle?: T;
+  seoDescription?: T;
+  socialLinks?:
+    | T
+    | {
+        platform?: T;
+        url?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-interface_select".
+ */
+export interface HomeInterfaceSelect<T extends boolean = true> {
+  heroBanners?:
+    | T
+    | {
+        image?: T;
+        title?: T;
+        subtitle?: T;
+        ctaLink?: T;
+        id?: T;
+      };
+  highlightStats?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        id?: T;
+      };
+  featuredHistory?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "collections_widget".
+ */
+export interface CollectionsWidget {
+  data?: {
+    [k: string]: unknown;
+  };
+  width: 'full';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
