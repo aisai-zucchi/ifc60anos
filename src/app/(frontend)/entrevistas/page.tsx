@@ -18,7 +18,7 @@ export default async function EntrevistasPage() {
     where: {
       status: { equals: 'Publicado' },
     },
-    sort: '-dateRecorded',
+    sort: ['rank', '-dateRecorded'],
   }) as any;
 
   return (

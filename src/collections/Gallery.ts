@@ -4,6 +4,7 @@ import { deleteMediaAfterDelete } from '../hooks/deleteMedia'
 export const Gallery: CollectionConfig = {
   slug: 'gallery',
   labels: { singular: 'Foto do Acervo', plural: 'Galeria' },
+  defaultSort: 'rank',
   admin: {
     useAsTitle: 'title',
     description: '🖼️ RELICÁRIO: Fotos para a Galeria e Memórias. Use legendas descritivas. Ao excluir, o arquivo físico também sai do servidor.',
@@ -21,6 +22,7 @@ export const Gallery: CollectionConfig = {
     { name: 'campus', type: 'relationship', relationTo: 'campuses' as any, label: 'Campus Relacionado' },
     { name: 'tags', type: 'relationship', relationTo: 'tags' as any, hasMany: true, label: 'Categorias (Tags)' },
     { name: 'credits', type: 'text', label: 'Créditos / Autor da Foto' },
+    { name: 'rank', type: 'number', label: 'Ranking (Menor = Primeiro)', defaultValue: 100, admin: { position: 'sidebar' } },
   ],
   hooks: {
     afterDelete: [deleteMediaAfterDelete],

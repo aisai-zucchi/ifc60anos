@@ -4,6 +4,7 @@ import { deleteMediaAfterDelete } from '../hooks/deleteMedia'
 export const Interviews: CollectionConfig = {
   slug: 'interviews',
   labels: { singular: 'Entrevista', plural: 'Entrevistas' },
+  defaultSort: 'rank',
   admin: {
     useAsTitle: 'title',
     description: '🎙️ VOZES DO CAMPUS: Cole o link do YouTube para vídeos ou suba o arquivo de áudio. IMPORTANTE: Cada entrevista deve ser vinculada a uma "Pessoa" cadastrada previamente.',
@@ -18,6 +19,7 @@ export const Interviews: CollectionConfig = {
     { name: 'transcription', type: 'richText', label: 'Transcrição em Texto' },
     { name: 'featuredImage', type: 'upload', relationTo: 'media', label: 'Imagem de Capa' },
     { name: 'dateRecorded', type: 'date', label: 'Data de Gravação' },
+    { name: 'rank', type: 'number', label: 'Ranking (Menor = Primeiro)', defaultValue: 100, admin: { position: 'sidebar' } },
     { name: 'status', type: 'select', options: ['Rascunho', 'Publicado'], defaultValue: 'Rascunho', label: 'Status' },
   ],
   hooks: {
