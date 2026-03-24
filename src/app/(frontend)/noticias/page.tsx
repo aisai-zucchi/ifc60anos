@@ -13,7 +13,7 @@ export default async function NoticiaPage() {
     where: {
       status: { equals: 'Publicado' },
     },
-    sort: ['rank', '-publishDate'],
+    sort: ['ranking', '-publishDate'],
   }) as any;
 
   return (

@@ -4,7 +4,7 @@ import { deleteMediaAfterDelete } from '../hooks/deleteMedia'
 export const Memories: CollectionConfig = {
   slug: 'memories',
   labels: { singular: 'Memória', plural: 'Memórias' },
-  defaultSort: 'rank',
+  defaultSort: 'ranking',
   admin: {
     useAsTitle: 'title',
     description: '📜 MEMÓRIAS: Relatos e vivências que moldaram o IFC Campus Concórdia. Use o editor para o texto completo.',
@@ -46,7 +46,7 @@ export const Memories: CollectionConfig = {
       type: 'richText',
       label: 'Conteúdo Completo',
     },
-    { name: 'rank', type: 'number', label: 'Ranking (Menor = Primeiro)', defaultValue: 100, admin: { position: 'sidebar' } },
+    { name: 'ranking', type: 'number', label: 'Ranking (Menor = Primeiro)', defaultValue: 100, admin: { position: 'sidebar' } },
     {
       name: 'status',
       type: 'select',
