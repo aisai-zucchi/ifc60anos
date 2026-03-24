@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 // This is a simplified Lexical renderer for Payload 3
 // It handles paragraphs, headings, lists, and embedded media (uploads)
@@ -40,11 +41,16 @@ export default function RichText({ content }: { content: any }) {
         if (value && value.url) {
           return (
             <figure key={index} style={{ margin: '2rem 0', textAlign: 'center' }}>
-              <img 
-                src={value.url} 
-                alt={value.alt || ''} 
-                style={{ maxWidth: '100%', height: 'auto', borderRadius: '8px' }} 
-              />
+              <div style={{ position: 'relative', width: '100%', maxWidth: '800px', margin: '0 auto' }}>
+                <Image 
+                  src={value.url} 
+                  alt={value.alt || ''} 
+                  width={value.width || 1200}
+                  height={value.height || 800}
+                  style={{ width: '100%', height: 'auto', borderRadius: '8px' }} 
+                  sizes="(max-width: 800px) 100vw, 800px"
+                />
+              </div>
               {value.alt && <figcaption style={{ fontSize: '0.9rem', opacity: 0.6, marginTop: '0.5rem' }}>{value.alt}</figcaption>}
             </figure>
           );

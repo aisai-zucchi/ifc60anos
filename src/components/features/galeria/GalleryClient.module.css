@@ -57,13 +57,22 @@
   overflow: hidden;
   position: relative;
   opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  cursor: pointer;
+}
+
+/* Base state: off-screen to the side or bottom */
+.item:nth-child(odd) {
+  transform: translateX(-40px);
+}
+
+.item:nth-child(even) {
+  transform: translateX(40px);
 }
 
 .item.visible {
   opacity: 1;
-  transform: none;
+  transform: translateX(0);
 }
 
 .item img {

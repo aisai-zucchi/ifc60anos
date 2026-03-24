@@ -97,9 +97,12 @@ export default function GalleryClient() {
       { threshold: 0.08 }
     );
 
-    container
-      .querySelectorAll(`.${styles.item}`)
-      .forEach((el) => obs.observe(el));
+    const items = container.querySelectorAll(`.${styles.item}`);
+    items.forEach((el) => {
+      el.classList.remove(styles.visible);
+      obs.observe(el);
+    });
+
     return () => obs.disconnect();
   }, [currentlyVisible]);
 
