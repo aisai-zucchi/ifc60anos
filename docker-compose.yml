@@ -44,8 +44,15 @@ services:
       - ./media:/app/media
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
+    # Script de inicialização: cria um certificado temporário se o real não existir para o Nginx não crashar
+    command: "/bin/sh -c '
+      mkdir -p /etc/letsencrypt/live/historia.concordia.ifc.edu.br && 
+      if [ ! -f /etc/letsencrypt/live/historia.concordia.ifc.edu.br/fullchain.pem ]; then
+        openssl req -x509 -nodes -newkey rsa:2048 -days 1 -keyout /etc/letsencrypt/live/historia.concordia.ifc.edu.br/privkey.pem -out /etc/letsencrypt/live/historia.concordia.ifc.edu.br/fullchain.pem -subj \"/CN=localhost\";
+      fi;
+      nginx -g \"daemon off;\"'"
     depends_on:
-      - app # O Nginx depende da aplicação rodando para encaminhar o tráfego
+      - app
 
   # Serviço do Certbot para SSL automático
   certbot:
@@ -55,8 +62,9 @@ services:
     volumes:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
-    # Script que tenta renovar o certificado a cada 12 horas
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+      - /var/run/docker.sock:/var/run/docker.sock # ESSENCIAL: Permite que o certbot reinicie o nginx após renovar o SSL
+    # Script que tenta renovar o certificado a cada 12 horas e recarrega o nginx se renovar
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew --deploy-hook \"docker exec ifc60anos_nginx nginx -s reload\"; sleep 12h & wait $${!}; done;'"
 
 volumes:
   # Volume nomeado para garantir que os dados do banco não sejam perdidos ao apagar containers

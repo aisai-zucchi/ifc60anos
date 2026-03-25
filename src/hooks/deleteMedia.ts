@@ -1,8 +1,6 @@
 import type { CollectionAfterDeleteHook } from 'payload'
 
 export const deleteMediaAfterDelete: CollectionAfterDeleteHook = async ({ req, doc }) => {
-  // Se o documento deletado tiver referências a mídias, precisamos decidir se as deletamos.
-  // No caso desse projeto, o usuário quer que a mídia suma se o objeto pai sumir.
   const findAndDeleteMedia = async (mediaId: string | any) => {
     if (!mediaId) return;
     const id = typeof mediaId === 'object' ? mediaId.id : mediaId;

@@ -1,0 +1,10 @@
+# Ignora arquivos desnecessários durante o build do Docker para acelerar a construção
+node_modules
+.next
+.git
+.gitignore
+.env
+*.md
+media
+certbot
+nginx
