@@ -15,7 +15,11 @@ services:
 
   # Serviço da Aplicação Next.js + Payload CMS
   app:
-    build: .
+    build:
+      context: .
+      args:
+        PAYLOAD_SECRET: ${PAYLOAD_SECRET}
+        DATABASE_URI: postgresql://${DB_USER:-payload}:${DB_PASSWORD:-payload_password}@db:5432/${DB_NAME:-ifc60anos}
     container_name: ifc60anos_app
     restart: always
     environment:

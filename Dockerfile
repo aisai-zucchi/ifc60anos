@@ -3,6 +3,12 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
+# Build args necessários em tempo de compilação
+ARG PAYLOAD_SECRET
+ARG DATABASE_URI
+ENV PAYLOAD_SECRET=$PAYLOAD_SECRET
+ENV DATABASE_URI=$DATABASE_URI
+
 # Instalação das dependências
 # Copiamos apenas os arquivos de manifesto primeiro para aproveitar o cache de camadas do Docker
 COPY package*.json ./
