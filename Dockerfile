@@ -6,8 +6,11 @@ WORKDIR /app
 # Build args necessários em tempo de compilação
 ARG PAYLOAD_SECRET
 ARG DATABASE_URI
-ENV PAYLOAD_SECRET=$PAYLOAD_SECRET
-ENV DATABASE_URI=$DATABASE_URI
+# Fallback apenas para o build (o valor real deve ser passado via docker-compose ou env)
+ENV PAYLOAD_SECRET=${PAYLOAD_SECRET:-dummy_secret_for_build_purposes}
+ENV DATABASE_URI=${DATABASE_URI:-postgresql://dummy:dummy@localhost:5432/dummy}
+# Pula validações desnecessárias do Payload durante o build de páginas estáticas se possível
+ENV NEXT_OUTPUT=standalone
 
 # Instalação das dependências
 # Copiamos apenas os arquivos de manifesto primeiro para aproveitar o cache de camadas do Docker

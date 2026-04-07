@@ -22,6 +22,7 @@ services:
         DATABASE_URI: postgresql://${DB_USER:-payload}:${DB_PASSWORD:-payload_password}@db:5432/${DB_NAME:-ifc60anos}
     container_name: ifc60anos_app
     restart: always
+    env_file: .env
     environment:
       DATABASE_URI: postgresql://${DB_USER:-payload}:${DB_PASSWORD:-payload_password}@db:5432/${DB_NAME:-ifc60anos}
       PAYLOAD_SECRET: ${PAYLOAD_SECRET}
